@@ -1,4 +1,6 @@
-use std::io::{BufRead, BufReader};
+use std::fs::{self, OpenOptions};
+use std::io::Write;
+use std::path::PathBuf;
 
 use reqwest::blocking::Client;
 use reqwest::Proxy;
@@ -9,9 +11,11 @@ const HTTPS_PROXY: &str = "http://192.168.1.4:7890";
 const MAX_RETRY: i32 = 5;
 
 fn main() -> Result<(), Box<dyn std::error::Error>> {
-    let sites_list = std::fs::File::open("../sites.txt")?;
-    let reader = BufReader::new(sites_list);
-    let mut sites = reader.lines();
+    let Args { sites, output } = Args::parse();
+
+    let current_list = unsafe { String::from_utf8_unchecked(fs::read(&output)?) };
+    let sites_list = unsafe { String::from_utf8_unchecked(fs::read(sites)?) };
+    let mut output = OpenOptions::new().append(true).read(false).open(output)?;
 
     let client = Client::builder()
         .proxy(Proxy::https(HTTPS_PROXY)?)
@@ -19,33 +23,48 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         .build()?;
 
     let regex = Regex::new("<title[^>]*>(.*)</title>")?;
-    while let Some(Ok(site)) = sites.next() {
-        if site.is_empty() {
-            break;
-        } // exit on blank line
 
-        let mut count = 0;
-        let content;
-        loop {
-            let re = client.get(&site).send();
-            match re {
-                Ok(resp) => {
-                    content = resp.text()?;
-                    break;
-                }
-                Err(e) => {
-                    count += 1;
-                    if count == MAX_RETRY {
-                        eprintln!("{e}");
-                        std::process::exit(1)
-                    }
-                    continue;
-                }
+    for site in sites_list
+        .lines()
+        .filter(|&site| !current_list.contains(site))
+    {
+        if site.is_empty() {
+            continue;
+        } // ignore empty lines
+
+        let mut content = None;
+        for _ in 0..MAX_RETRY {
+            if let Ok(resp) = client.get(site).send() {
+                content = Some(resp.text()?);
+                break;
             }
         }
-        let title = regex.captures(&content).unwrap().get(1).unwrap().as_str();
-        println!("[{title}]({site})\n");
+
+        if let Some(content) = content {
+            if let Some(title) = regex.captures(&content).and_then(|cap| cap.get(1)) {
+                output.write_fmt(format_args!("[{}]({site})\n", title.as_str().trim()))?
+            } else {
+                eprintln!("{} does not contains title!", site);
+                output.write_fmt(format_args!("[无标题]({site})"))?;
+                continue;
+            }
+        }
     }
 
     Ok(())
+}
+
+use clap::Parser;
+use clap::ValueHint;
+
+#[derive(Parser, Debug)]
+#[clap(author, version, about, long_about = None)]
+struct Args {
+    /// plain text file, contains sites to generate
+    #[clap(short, long, value_parser, value_hint = ValueHint::FilePath)]
+    sites: PathBuf,
+
+    /// result file, should exists
+    #[clap(short, long, value_parser, value_hint = ValueHint::FilePath)]
+    output: PathBuf,
 }

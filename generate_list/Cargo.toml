@@ -1,6 +1,6 @@
 [package]
 name = "generate_list"
-version = "0.1.0"
+version = "0.1.1"
 edition = "2021"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
@@ -8,3 +8,4 @@ edition = "2021"
 [dependencies]
 reqwest = {version = "0.11.11", features = ["blocking"]}
 regex = "1.6.0"
+clap = {version = "3.2", features = ["derive"]}
