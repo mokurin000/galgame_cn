@@ -20,19 +20,14 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     let sites_list = unsafe { String::from_utf8_unchecked(fs::read(sites)?) };
     let mut output = OpenOptions::new().append(true).read(false).open(output)?;
 
-    let client;
-
-    if let Some(proxy) = proxy {
-        let proxy = Proxy::all(proxy)?;
-        client = Client::builder()
-        .proxy(proxy)
-        .user_agent("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36")
-        .build()?;
+    let client = if let Some(proxy) = proxy {
+        Client::builder()
+        .proxy(Proxy::all(proxy)?)
     } else {
-        client = Client::builder()
+        Client::builder()
+    }
         .user_agent("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36")
         .build()?;
-    }
 
     let regex = Regex::new("<title[^>]*>(.*)</title>")?;
 
