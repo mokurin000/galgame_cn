@@ -47,13 +47,11 @@ touch ../readme.md &&\
 
 [ACG爱动漫 &#8211; 萌文化、二次元分享社区](https://www.moe17.com/)
 
-[好GAL - 精品galgame游戏资源下载_只发布好玩的汉化版galgame](https://www.xiugal.com/)
+[好GAL - 精品galgame游戏资源下载\_只发布好玩的汉化版galgame](https://www.xiugal.com/)
 
 [萌幻之乡](https://hmoe.top/)
 
 [ACGN社区](https://www.acgnsq.com/)
-
-[月幕Galgame-最戳你XP的美少女游戏综合交流平台 | 来感受这绝妙的艺术体裁](https://www.ymgal.com/)
 
 [绯月ScarletMoon](https://bbs.kfmax.com/)
 
@@ -62,3 +60,5 @@ touch ../readme.md &&\
 [SS同盟首页](https://sstm.moe/)
 
 [Free Download Visual Novel Hentai Games Japanese (RAW) and English Translation - Ryuugames](https://www.ryuugames.com/)
+
+[月幕Galgame-最戳你XP的美少女游戏综合交流平台 | 来感受这绝妙的艺术体裁](https://www.ymgal.games/)
