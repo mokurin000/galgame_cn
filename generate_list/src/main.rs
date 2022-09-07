@@ -87,6 +87,7 @@ struct Args {
     #[clap(short, long, value_parser, value_hint = ValueHint::FilePath)]
     output: PathBuf,
 
+    /// [optional] proxy to set, for example http://127.0.0.1:8080
     #[clap(short, long, value_parser)]
     proxy: Option<String>,
 }

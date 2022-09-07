@@ -2,7 +2,7 @@
 name = "generate_list"
 authors = ["poly000"]
 description = "generate [title](link) from URL's"
-version = "0.2.0"
+version = "0.2.1"
 edition = "2021"
 license-file = "LICENSE"
 
