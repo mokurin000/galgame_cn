@@ -7,20 +7,32 @@ use reqwest::Proxy;
 
 use regex::Regex;
 
-const HTTPS_PROXY: &str = "http://192.168.1.4:7890";
 const MAX_RETRY: i32 = 5;
 
 fn main() -> Result<(), Box<dyn std::error::Error>> {
-    let Args { sites, output } = Args::parse();
+    let Args {
+        sites,
+        output,
+        proxy,
+    } = Args::parse();
 
     let current_list = unsafe { String::from_utf8_unchecked(fs::read(&output)?) };
     let sites_list = unsafe { String::from_utf8_unchecked(fs::read(sites)?) };
     let mut output = OpenOptions::new().append(true).read(false).open(output)?;
 
-    let client = Client::builder()
-        .proxy(Proxy::https(HTTPS_PROXY)?)
+    let client;
+
+    if let Some(proxy) = proxy {
+        let proxy = Proxy::all(proxy)?;
+        client = Client::builder()
+        .proxy(proxy)
         .user_agent("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36")
         .build()?;
+    } else {
+        client = Client::builder()
+        .user_agent("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36")
+        .build()?;
+    }
 
     let regex = Regex::new("<title[^>]*>(.*)</title>")?;
 
@@ -42,7 +54,14 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
 
         if let Some(content) = content {
             if let Some(title) = regex.captures(&content).and_then(|cap| cap.get(1)) {
-                output.write_fmt(format_args!("[{}]({site})\n", title.as_str().trim()))?
+                output.write_fmt(format_args!(
+                    "[{}]({site})\n",
+                    title
+                        .as_str()
+                        .trim()
+                        .replace("_", "\\_")
+                        .replace("*", "\\*")
+                ))?
             } else {
                 eprintln!("{} does not contains title!", site);
                 output.write_fmt(format_args!("[无标题]({site})"))?;
@@ -67,4 +86,7 @@ struct Args {
     /// result file, should exists
     #[clap(short, long, value_parser, value_hint = ValueHint::FilePath)]
     output: PathBuf,
+
+    #[clap(short, long, value_parser)]
+    proxy: Option<String>,
 }
