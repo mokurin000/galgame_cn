@@ -62,3 +62,6 @@ touch ../readme.md &&\
 [Free Download Visual Novel Hentai Games Japanese (RAW) and English Translation - Ryuugames](https://www.ryuugames.com/)
 
 [月幕Galgame-最戳你XP的美少女游戏综合交流平台 | 来感受这绝妙的艺术体裁](https://www.ymgal.games/)
+
+[galgame 资源站](https://shinnku.com/)
+
