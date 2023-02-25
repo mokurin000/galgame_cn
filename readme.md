@@ -65,3 +65,4 @@ touch ../readme.md &&\
 
 [galgame 资源站](https://shinnku.com/)
 
+[xxacg - 超多Galgame资源](https://xx-acg.com/)
