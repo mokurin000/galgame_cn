@@ -27,6 +27,8 @@ touch ../readme.md &&\
 
 [Galgame Cloud](https://t.me/galgame_in_telegram)
 
+[Galgame频道](https://t.me/Galgamer_channel)
+
 ## 网站
 
 [初音的青葱网发布页](https://www.xygalgame.com)
