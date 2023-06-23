@@ -29,6 +29,8 @@ touch ../readme.md &&\
 
 [Galgame频道](https://t.me/Galgamer_channel)
 
+[Visual Novel Channel](https://t.me/erogamecloud)
+
 ## 网站
 
 [初音的青葱网发布页](https://www.xygalgame.com)
