@@ -19,7 +19,11 @@ async fn main() -> anyhow::Result<()> {
 
     let current_list = unsafe { String::from_utf8_unchecked(fs::read(&output)?) };
     let sites_list = unsafe { String::from_utf8_unchecked(fs::read(sites)?) };
-    let output = OpenOptions::new().append(true).read(false).open(output)?;
+    let output = OpenOptions::new()
+        .create(false)
+        .append(true)
+        .read(false)
+        .open(output)?;
     let mut out = BufWriter::new(output);
 
     let pw = Playwright::initialize().await?;
@@ -41,8 +45,10 @@ async fn main() -> anyhow::Result<()> {
 
     let mut task_set: JoinSet<anyhow::Result<Option<String>>> = JoinSet::new();
 
-	std::fs::create_dir("res")?;
-	
+    if !std::fs::read_dir("res").is_ok() {
+        std::fs::create_dir("res")?;
+    }
+
     for site in sites_list
         .lines()
         .filter(|&site| !site.is_empty())
@@ -73,14 +79,14 @@ async fn main() -> anyhow::Result<()> {
             );
 
             let title = page.title().await?;
-            let out = Some(format!("[![{title}]({screenshot})]({site})\n\n"));
+            let md_line = Some(format!("[![{title}]({screenshot})]({site})\n\n"));
 
             page.screenshot_builder()
                 .path(screenshot.into())
                 .screenshot()
                 .await?;
 
-            Ok(out)
+            Ok(md_line)
         });
     }
 

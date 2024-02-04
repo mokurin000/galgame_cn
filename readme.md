@@ -34,6 +34,10 @@ touch ../readme.md &&
 
 [Visual Novel Channel](https://t.me/erogamecloud)
 
+[秘密基地之游戏仓储中心](https://t.me/heiheinon)
+
+[『雨夜凉亭』ACG频道](https://t.me/yuyeweimian)
+
 ## 网站
 
 [![月幕Galgame-最戳你XP的美少女游戏综合交流平台 | 来感受这绝妙的艺术体裁](res/92465a3a8ecd124c0170edac6ad0443a.webp)](https://www.ymgal.games/)
@@ -63,4 +67,10 @@ touch ../readme.md &&
 [![ACGN社区](res/414d3d342a1f381445df6d966036381b.webp)](https://www.acgnsq.com/)
 
 [![绯月ScarletMoon](res/64f0454e9029767adb5ae68caa84921a.webp)](https://bbs.kfmax.com/)
+
+[![梦幻星空电脑单机游戏下载-最新PC单机游戏下载,破解单机游戏下载 - 梦幻星空](res/ec5b7089407143629af1f4e633d941b0.webp)](https://www.banbaog.com/)
+
+[![梦灵神社 – 梦之神灵 零梦初醒](res/afac9e68d200d2a878f0758dbce9b4d4.webp)](https://www.mkwgame.com/)
+
+[![『澄空学园』 GalGame专题网](res/4fadefab4e3d7b121ab38f8a6f890600.webp)](https://bbs.sumisora.net/)
 
