@@ -74,3 +74,5 @@ touch ../readme.md &&
 
 [![『澄空学园』 GalGame专题网](res/4fadefab4e3d7b121ab38f8a6f890600.webp)](https://bbs.sumisora.net/)
 
+[![TouchGAL-一站式Galgame文化社区！](res/5404300909bbfdc9cbf9c0ac9e9726f1.webp)](https://www.touchgal.com)
+
