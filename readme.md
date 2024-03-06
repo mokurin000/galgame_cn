@@ -38,6 +38,18 @@ touch ../readme.md &&
 
 [『雨夜凉亭』ACG频道](https://t.me/yuyeweimian)
 
+[夏风小分队](https://t.me/XiafengButter)
+
+[黄油仓库](https://t.me/quzimingyue)
+
+[Farr的黄油（游）仓库SLG.RPG.ADV.3D](https://t.me/farrslgrpg)
+
+[山の黄油阁](https://t.me/HY_QingYan)
+
+[里番 黄油聚集地](https://t.me/lifanhuang)
+
+[一起钓大鱼](https://t.me/dayuyud)
+
 ## 网站
 
 [![月幕Galgame-最戳你XP的美少女游戏综合交流平台 | 来感受这绝妙的艺术体裁](res/92465a3a8ecd124c0170edac6ad0443a.webp)](https://www.ymgal.games/)
