@@ -50,13 +50,20 @@ async fn main() -> anyhow::Result<()> {
         std::fs::create_dir("res")?;
     }
 
-    for site in sites_list
+    for mut site in sites_list
         .lines()
         .filter(|&site| !site.is_empty())
         .filter(|&site| !current_list.contains(site))
         .map(|s| s.to_owned())
     {
         let context = context.clone();
+        let _site = site.clone();
+        let split = _site.split_whitespace().collect::<Vec<_>>();
+        let mut caption = None;
+        if split.len() > 1 {
+            site = split[0].to_owned();
+            caption = Some(split[1].to_owned());
+        }
         task_set.spawn(async move {
             let page = context.new_page().await?;
 
@@ -88,11 +95,22 @@ async fn main() -> anyhow::Result<()> {
                 .screenshot()
                 .await?;
 
-            let md_line = tokio::task::spawn_blocking(move || {
-                format!("[![{title}]({screenshot_out})]({site})\n\n")
+            let markdown_text = tokio::task::spawn_blocking(move || match caption {
+                Some(caption) => format!(
+                    r#"
+<figure class="image">
+  <a href="{site}">
+    <img src="{screenshot_out}" alt="{title}"></img>
+  </a>
+  <figcaption>{caption}</figcaption>
+</figure>
+
+"#
+                ),
+                None => format!("[![{title}]({screenshot_out})]({site})\n\n"),
             })
             .await?;
-            Ok(Some(md_line))
+            Ok(Some(markdown_text))
         });
     }
 
