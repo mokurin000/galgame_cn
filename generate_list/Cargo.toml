@@ -10,7 +10,7 @@ license-file = "LICENSE"
 
 [dependencies]
 clap = { version = "4.5.13", features = ["derive"] }
-tokio = { version = "1.28.2", features = ["macros", "rt-multi-thread", "time"] }
+tokio = { version = "1.39.2", features = ["macros", "rt-multi-thread", "time"] }
 playwright = "0.0.20"
 anyhow = "1.0.71"
 hex-simd = "0.8.0"
