@@ -7,8 +7,6 @@ use playwright::Playwright;
 use std::sync::Arc;
 use tokio::task::JoinSet;
 
-const MAX_RETRY: i32 = 5;
-
 #[tokio::main]
 async fn main() -> anyhow::Result<()> {
     let Args {
@@ -41,7 +39,10 @@ async fn main() -> anyhow::Result<()> {
     }
 
     let browser = launcher.launch().await?;
-    let context = Arc::new(browser.context_builder().build().await?);
+    let context = Arc::new(browser.context_builder().user_agent("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36 GLS/100.10.9939.100").build().await?);
+
+    // bypass CF for ryuugames
+    context.add_cookies(&[Cookie::with_domain_path("cf_clearance", "CqCW39e7Dqzq4e74ac4NBDP_TkjJuvM6TtGCyEHqtQE-1723046672-1.0.1.1-_1Dj47lZPpDpiW6Iw6zb_lg3ZrmKgkJpxrRcxwhKWsXRtmHFy.YSBcCOYupK.I.ZSZ7tmJbfU729PlTb6K0NpQ", ".ryuugames.com", "/")]).await?;
 
     let mut task_set: JoinSet<anyhow::Result<Option<String>>> = JoinSet::new();
 
@@ -59,34 +60,39 @@ async fn main() -> anyhow::Result<()> {
         task_set.spawn(async move {
             let page = context.new_page().await?;
 
-            let mut load_ok = false;
-            for _ in 0..MAX_RETRY {
-                if let Ok(Some(_)) = page.goto_builder(&site).goto().await {
-                    load_ok = true;
-                    break;
-                }
-            }
-
-            if !load_ok {
+            let Ok(Some(_)) = page
+                .goto_builder(&site)
+                .wait_until(DocumentLoadState::Load)
+                .goto()
+                .await
+            else {
                 return Ok(None);
-            }
+            };
+
+            let _site = site.clone();
+            let screenshot_out = tokio::task::spawn_blocking(move || {
+                format!(
+                    "res/{}.webp",
+                    hex_simd::encode_to_string(md5::compute(&_site).0, hex_simd::AsciiCase::Lower)
+                )
+            })
+            .await?;
+            println!("screenshot path for {site}: {screenshot_out}");
 
             tokio::time::sleep(Duration::from_secs(10)).await;
 
-            let screenshot = format!(
-                "res/{}.webp",
-                hex_simd::encode_to_string(md5::compute(&site).0, hex_simd::AsciiCase::Lower)
-            );
-
             let title = page.title().await?;
-            let md_line = Some(format!("[![{title}]({screenshot})]({site})\n\n"));
 
             page.screenshot_builder()
-                .path(screenshot.into())
+                .path(screenshot_out.clone().into())
                 .screenshot()
                 .await?;
 
-            Ok(md_line)
+            let md_line = tokio::task::spawn_blocking(move || {
+                format!("[![{title}]({screenshot_out})]({site})\n\n")
+            })
+            .await?;
+            Ok(Some(md_line))
         });
     }
 
@@ -101,7 +107,7 @@ async fn main() -> anyhow::Result<()> {
 
 use clap::Parser;
 use clap::ValueHint;
-use playwright::api::ProxySettings;
+use playwright::api::{Cookie, DocumentLoadState, ProxySettings};
 
 #[derive(Parser, Debug)]
 #[clap(author, version, about, long_about = None)]
