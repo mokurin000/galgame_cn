@@ -27,7 +27,7 @@ async fn main() -> anyhow::Result<()> {
     let pw = Playwright::initialize().await?;
     pw.install_chromium()?;
     let chromium = pw.chromium();
-    let mut launcher = chromium.launcher().headless(true);
+    let mut launcher = chromium.launcher().headless(false);
 
     if let Some(proxy) = proxy {
         launcher = launcher.proxy(ProxySettings {
@@ -53,7 +53,7 @@ async fn main() -> anyhow::Result<()> {
     for mut site in sites_list
         .lines()
         .filter(|&site| !site.is_empty())
-        .filter(|&site| !current_list.contains(site))
+        .filter(|&site| !current_list.contains(site.split_whitespace().next().unwrap()))
         .map(|s| s.to_owned())
     {
         let context = context.clone();
@@ -67,14 +67,12 @@ async fn main() -> anyhow::Result<()> {
         task_set.spawn(async move {
             let page = context.new_page().await?;
 
-            let Ok(Some(_)) = page
+            let _ = page
                 .goto_builder(&site)
                 .wait_until(DocumentLoadState::Load)
+                .timeout(10_000.0)
                 .goto()
-                .await
-            else {
-                return Ok(None);
-            };
+                .await;
 
             let _site = site.clone();
             let screenshot_out = tokio::task::spawn_blocking(move || {
