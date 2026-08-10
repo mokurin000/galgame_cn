@@ -92,7 +92,7 @@ touch ../readme.md &&
 </figure>
 
 <figure class="image">
-  <a href="https://hacg.meme/wp/category/all/game/">
+  <a href="https://www.hacg.icu/wp/game.html">
     <img src="res/b69be616c4f83786efc3faf36acab2ac.webp" alt="游戏 | 琉璃神社 ★ HACG.LA"></img>
   </a>
   <figcaption>琉璃神社</figcaption>
@@ -140,7 +140,7 @@ touch ../readme.md &&
 
 
 <figure class="image">
-  <a href="https://hmoe.top/">
+  <a href="https://www.mhh1.com/">
     <img src="res/f0e5e8251d4b7678ad4bd82cdb02511f.webp" alt="萌幻之乡"></img>
   </a>
   <figcaption>萌幻之乡</figcaption>
@@ -148,7 +148,7 @@ touch ../readme.md &&
 
 
 <figure class="image">
-  <a href="https://www.touchgal.com">
+  <a href="https://www.touchgal.ink/">
     <img src="res/5404300909bbfdc9cbf9c0ac9e9726f1.webp" alt="TouchGAL-一站式Galgame文化社区！"></img>
   </a>
   <figcaption>TouchGal</figcaption>
@@ -156,18 +156,10 @@ touch ../readme.md &&
 
 
 <figure class="image">
-  <a href="https://www.acgnsq.com/">
+  <a href="https://cn.acgnsns.com/">
     <img src="res/414d3d342a1f381445df6d966036381b.webp" alt="ACGN社区"></img>
   </a>
   <figcaption>ACGN社区</figcaption>
-</figure>
-
-
-<figure class="image">
-  <a href="https://www.tianshie.com">
-    <img src="res/a46207b605878b31788c83e4cacb57ca.webp" alt="天使二次元 — 本站专注ACG，主攻Galgame，兼攻Comic，Anime。以汉化版Galgame为主，为未来Gal中文界培养生力军。"></img>
-  </a>
-  <figcaption>天使二次元</figcaption>
 </figure>
 
 
@@ -196,7 +188,7 @@ touch ../readme.md &&
 
 
 <figure class="image">
-  <a href="https://www.mkwgame.com/">
+  <a href="https://2.mkwgame.com/">
     <img src="res/afac9e68d200d2a878f0758dbce9b4d4.webp" alt="梦灵神社 – 梦之神灵 零梦初醒"></img>
   </a>
   <figcaption>梦灵神社</figcaption>
@@ -212,9 +204,9 @@ touch ../readme.md &&
 
 <figure class="image">
   <a href="https://shinnku.com/">
-    <img src="res/8eaaddd2f65b786478075c8dbeac6ede.webp" alt="失落小站 - galgame资源站"></img>
+    <img src="res/8eaaddd2f65b786478075c8dbeac6ede.webp" alt="真红小站"></img>
   </a>
-  <figcaption>失落的小站</figcaption>
+  <figcaption>真红小站</figcaption>
 </figure>
 
 <figure class="image">
@@ -224,6 +216,9 @@ touch ../readme.md &&
   <figcaption>澄空学园，BBS</figcaption>
 </figure>
 
-[![次元狗 – 动漫资源分享下载,二次元世界](res/58c0a765b2373cce0460a2bbfdecc933.webp)](https://www.acgndog.com/)
-
-[![南+ South Plus - powered by Pu!mdHd](res/654ff792a09b35c5a828cdcbd4b61f5f.webp)](https://south-plus.org/ )
+<figure class="image">
+  <a href="https://south-plus.org/">
+    <img src="res/654ff792a09b35c5a828cdcbd4b61f5f.webp" alt="『澄空学园』 GalGame专题网"></img>
+  </a>
+  <figcaption>南+ South Plus</figcaption>
+</figure>
