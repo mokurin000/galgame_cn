@@ -16,8 +16,8 @@
 cd generate_list &&
 touch ../readme.md &&
    mkdir res &&
-      cargo run -- -o ../readme.md -s ../sites.txt &&
-      mv res ..
+      uv run main.py -o ../readme.md -s ../sites.txt &&
+      mv res/* ../res && rmdir res
 ```
 
 ## 频道
@@ -222,3 +222,13 @@ touch ../readme.md &&
   </a>
   <figcaption>南+ South Plus</figcaption>
 </figure>
+
+[![acgndog.com](res\58c0a765b2373cce0460a2bbfdecc933.webp)](https://www.acgndog.com/)
+
+<figure class="image">
+  <a href="https://acgll.xyz">
+    <img src="res\bc099fb8fbf5cc20e3ac0ebe1f26c094.webp" alt="acgll.xyz"></img>
+  </a>
+  <figcaption>AI汉化Galgame/SLG游戏资源，免费下载持续更新</figcaption>
+</figure>
+

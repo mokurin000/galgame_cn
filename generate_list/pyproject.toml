@@ -1,0 +1,10 @@
+[project]
+name = "generate-list"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.14"
+dependencies = [
+    "typer>=0.27.1",
+    "zendriver>=0.15.5",
+]

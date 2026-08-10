@@ -1,2 +1,8 @@
-target
+__pycache__
 
+/uv.lock
+/.python-version
+
+*.dist
+*.egg-info
+*.spec
