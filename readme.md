@@ -32,23 +32,11 @@ touch ../readme.md &&
 
 [Galgame频道](https://t.me/Galgamer_channel)
 
-[Visual Novel Channel](https://t.me/erogamecloud)
-
 [秘密基地之游戏仓储中心](https://t.me/heiheinon)
 
 [『雨夜凉亭』ACG频道](https://t.me/therainArchive)
 
-[夏风小分队](https://t.me/XiafengButter)
-
-[黄油仓库](https://t.me/quzimingyue)
-
 [Farr的黄油（游）仓库SLG.RPG.ADV.3D](https://t.me/farrslgrpg)
-
-[山の黄油阁](https://t.me/HY_QingYan)
-
-[里番 黄油聚集地](https://t.me/lifanhuang)
-
-[一起钓大鱼](https://t.me/dayuyud)
 
 ## 网站
 
